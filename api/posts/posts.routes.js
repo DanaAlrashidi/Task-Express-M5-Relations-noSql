@@ -19,10 +19,10 @@ router.param("postId", async (req, res, next, postId) => {
     next(err);
   }
 });
-
+// router.get("/", fetchPost);
 router.get("/", postsGet);
 router.post("/", postsCreate);
-
+router.post("/", tagAdd);
 router.delete("/:postId", postsDelete);
 
 router.put("/:postId", postsUpdate);

@@ -44,10 +44,28 @@ exports.postsUpdate = async (req, res) => {
 
 exports.postsGet = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().populate("tag");
     res.json(posts);
   } catch (error) {
     next(error);
   }
 };
-module.exports = { fetchPost, postsCreate, postsDelete, postsUpdate, postsGet };
+exports.tagAdd = async (req, res, next) => {
+  try {
+    const { tagId } = req.params;
+    const post = await Post.findByIdAndUpdate(tagId);
+    if (!post) return res.status(404).json({ message: "POST not found" });
+    await post.updateOne({ $push: { posts: post._id } });
+    return res.status(204).end;
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = {
+  fetchPost,
+  postsCreate,
+  postsDelete,
+  postsUpdate,
+  postsGet,
+  tagAdd,
+};
