@@ -61,11 +61,13 @@ exports.tagAdd = async (req, res, next) => {
     next(error);
   }
 };
-module.exports = {
-  fetchPost,
-  postsCreate,
-  postsDelete,
-  postsUpdate,
-  postsGet,
-  tagAdd,
-};
+
+exports;
+// module.exports = {
+//   fetchPost,
+//   postsCreate,
+//   postsDelete,
+//   postsUpdate,
+//   postsGet,
+//   tagAdd,
+// };
