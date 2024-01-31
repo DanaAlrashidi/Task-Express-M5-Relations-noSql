@@ -1,5 +1,6 @@
 const Author = require("../../models/Author");
 const Post = require("../../models/Post");
+const Tag = require("../../models/Tag");
 
 exports.fetchPost = async (postId, next) => {
   try {
@@ -61,7 +62,14 @@ exports.tagAdd = async (req, res, next) => {
     next(error);
   }
 };
-
+exports.getTag = async (req, res, next) => {
+  try {
+    const tags = await Tag.find();
+    return res.status(200).json(tags);
+  } catch (error) {
+    next(error);
+  }
+};
 exports;
 // module.exports = {
 //   fetchPost,
